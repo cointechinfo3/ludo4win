@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Ludo4win • Premium Paid Ludo</title>
+  <!-- Font Awesome 6 for crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0b1a2f 0%, #1a2f40 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      margin: 0;
+    }
+
+    /* main glass card */
+    .game-card {
+      max-width: 480px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 3.5rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      padding: 2rem 1.5rem 2.2rem;
+      color: #fff;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* dice icon animated */
+    .dice-wrapper {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 2.8rem;
+      filter: drop-shadow(0 8px 12px #00000050);
+    }
+    .dice-wrapper i {
+      background: linear-gradient(180deg, #f9e076 0%, #e4b11c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: floatDice 2.6s infinite ease-in-out;
+    }
+    .dice-wrapper i:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+    .dice-wrapper i:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes floatDice {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    h1 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #FFD966, #FFB347, #FFD966);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      margin: 0.4rem 0 0.2rem;
+      line-height: 1.1;
+    }
+
+    .sub-badge {
+      background: rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 40px;
+      padding: 0.4rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #FFE484;
+      border: 1px solid rgba(255, 200, 0, 0.6);
+      margin: 0.6rem 0 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .prize-pool {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      border-radius: 3rem;
+      padding: 0.9rem 2rem;
+      margin: 0.8rem 0 1.3rem;
+      border: 1px solid rgba(255, 215, 0, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .prize-pool:active {
+      transform: scale(0.97);
+    }
+
+    .prize-pool i {
+      font-size: 2rem;
+      color: #FFD966;
+      filter: drop-shadow(0 0 6px gold);
+    }
+
+    .prize-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .prize-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+    .prize-amount {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFD966;
+      line-height: 1.2;
+      text-shadow: 0 0 12px black;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      width: 100%;
+      margin: 1rem 0 1.8rem;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      padding: 0.9rem 0.4rem;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .feature-item i {
+      font-size: 1.8rem;
+      color: #f5c542;
+      background: rgba(0,0,0,0.3);
+      padding: 0.5rem;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-item span {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #f0e6c5;
+    }
+    .feature-item small {
+      font-size: 0.7rem;
+      opacity: 0.75;
+    }
+
+    .join-buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 3rem;
+      padding: 1rem 1.8rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: rgba(20, 30, 40, 0.7);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      transition: all 0.25s;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+      text-decoration: none;
+    }
+
+    /* Google Play download button - special styling */
+    .btn-google-play {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      border: 1px solid #FFD966;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(0, 160, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .btn-google-play i {
+      font-size: 1.8rem;
+      color: #FFD966;
+    }
+
+    .btn-google-play .play-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .btn-google-play .play-text small {
+      font-size: 0.7rem;
+      font-weight: 400;
+      opacity: 0.9;
+      letter-spacing: 0.5px;
+    }
+    .btn-google-play .play-text strong {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .btn-practice {
+      background: rgba(20, 30, 40, 0.7);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: #ffd966;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.7);
+    }
+
+    .btn-google-play:hover {
+      background: linear-gradient(135deg, #1f2b40, #134074);
+      box-shadow: 0 15px 28px rgba(0, 180, 255, 0.45);
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      opacity: 0.8;
+      color: #ccc;
+    }
+
+    hr {
+      width: 70%;
+      border: 0.5px solid rgba(255, 215, 0, 0.4);
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    /* mobile fine-tune */
+    @media (max-width: 400px) {
+      .game-card {
+        padding: 1.8rem 1rem 2rem;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+      .btn-google-play .play-text strong {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-card">
+    
+    <!-- Animated dice icons -->
+    <div class="dice-wrapper">
+      <i class="fas fa-dice-six"></i>
+      <i class="fas fa-dice-one"></i>
+      <i class="fas fa-dice-five"></i>
+    </div>
+
+    <!-- Game Title -->
+    <h1>Ludo4win</h1>
+    
+    <!-- Premium Paid Badge -->
+    <div class="sub-badge">
+      <i class="fas fa-crown" style="color: #FFD966;"></i> PAID LEAGUE
+      <i class="fas fa-shield-alt" style="margin-left: 0.3rem;"></i>
+    </div>
+
+    <!-- Real-time prize pool display -->
+    <div class="prize-pool" id="prizePoolClick">
+      <i class="fas fa-trophy"></i>
+      <div class="prize-text">
+        <span class="prize-label">Today's Pool</span>
+        <span class="prize-amount">₹51,250</span>
+      </div>
+      <i class="fas fa-gem" style="font-size: 1.5rem; margin-left: 0.2rem;"></i>
+    </div>
+
+    <!-- Key features grid -->
+    <div class="features-grid">
+      <div class="feature-item">
+        <i class="fas fa-indian-rupee-sign"></i>
+        <span>Entry ₹ 10 to 5000</span>
+        <small>Win real cash</small>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-users"></i>
+        <span>1, 2 & 4 Players</span>
+        <small>Classic board</small>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-bolt"></i>
+        <span>Instant Pay</span>
+        <small>UPI & Bank</small>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-clock"></i>
+        <span>Live 24/7</span>
+        <small>Quick match</small>
+      </div>
+    </div>
+
+    <!-- Call to actions - Google Play Download button + Practice button -->
+    <div class="join-buttons">
+      <!-- Google Play Download Button (opens APK link) -->
+      <a href="https://apk.e-droid.net/apk/app4114734-g3pwx9.apk" class="btn btn-google-play" id="googlePlayBtn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-google-play"></i>
+        <div class="play-text">
+          <small>GET IT ON</small>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+      
+      <!-- Practice Free Button -->
+      <button class="btn btn-practice" id="practiceBtn">
+        <i class="fas fa-dice"></i> Practice Free
+      </button>
+    </div>
+
+    <!-- Trust and secure message -->
+    <div class="secure-note">
+      <i class="fas fa-lock"></i> Secure payments • 100% skill based
+      <i class="fas fa-certificate" style="margin-left: 0.3rem;"></i>
+    </div>
+    
+    <hr />
+    <div style="font-size: 0.7rem; opacity: 0.6; display: flex; gap: 1.2rem;">
+      <span><i class="far fa-check-circle"></i> Ludo4win</span>
+      <span><i class="fas fa-mobile-alt"></i> Mobile ready</span>
+    </div>
+  </div>
+
+  <!-- Interactive script for buttons -->
+  <script>
+    (function() {
+      // Practice button functionality
+      const practiceBtn = document.getElementById('practiceBtn');
+      const prizePool = document.getElementById('prizePoolClick');
+
+      function showLudo4winToast(title, message, icon) {
+        // Remove any existing toast
+        const existingToast = document.querySelector('.ludo-toast');
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'ludo-toast';
+        toast.innerHTML = `
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <i class="${icon}" style="font-size:1.5rem; color:#FFD966;"></i>
+            <div>
+              <strong style="color:#FFD966;">${title}</strong>
+              <p style="margin:0; font-size:0.85rem; color:#eee;">${message}</p>
+            </div>
+          </div>
+        `;
+        
+        // Style the toast notification
+        Object.assign(toast.style, {
+          position: 'fixed',
+          bottom: '25px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'rgba(10, 20, 30, 0.9)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: '3rem',
+          padding: '0.9rem 1.8rem',
+          color: 'white',
+          boxShadow: '0 15px 30px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,215,0,0.5)',
+          zIndex: '9999',
+          fontWeight: '500',
+          maxWidth: '90vw',
+          textAlign: 'center',
+          fontSize: '0.95rem'
+        });
+
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          if (toast && toast.parentNode) {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s';
+            setTimeout(() => toast.remove(), 400);
+          }
+        }, 3200);
+      }
+
+      // Practice button click event
+      practiceBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLudo4winToast(
+          'Practice Mode',
+          'Free play with AI bots. No real money involved. Sharpen your skills!',
+          'fas fa-robot'
+        );
+        // Button press animation
+        practiceBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => { practiceBtn.style.transform = ''; }, 150);
+      });
+
+      // Prize pool click shows breakdown
+      prizePool.addEventListener('click', function() {
+        showLudo4winToast(
+          'Ludo4win Prize Pool',
+          'Total winnings distributed among top 2 players. 1st: ₹30,000 | 2nd: ₹21,250',
+          'fas fa-coins'
+        );
+      });
+
+      // Log that Google Play button will open the APK link
+      const googlePlayBtn = document.getElementById('googlePlayBtn');
+      if (googlePlayBtn) {
+        googlePlayBtn.addEventListener('click', function(e) {
+          // The link will naturally open due to href, but we can add a subtle toast
+          showLudo4winToast(
+            'Downloading Ludo4win',
+            'APK download starting... Install and start winning!',
+            'fab fa-google-play'
+          );
+          // No preventDefault, so the browser opens the link
+        });
+      }
+
+      console.log('🎲 Ludo4win - Download on Google Play & start winning!');
+    })();
+  </script>
+</body>
+</html>
